@@ -1,8 +1,5 @@
 package SistemaDeBecas;
 
-import com.complexible.stardog.api.Connection;
-import com.complexible.stardog.api.ConnectionConfiguration;
-
 public class Controller {
 
 	Connection connection = ConnectionConfiguration
