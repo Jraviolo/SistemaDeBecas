@@ -10,6 +10,9 @@ plugins {
     // Apply the java-library plugin to add support for Java Library
     id 'java-library'
 }
+apply plugin: 'eclipse'
+apply plugin: 'java'
+apply plugin: 'application'
 
 repositories {
     // Use jcenter for resolving dependencies.
@@ -22,12 +25,12 @@ repositories {
 
 dependencies {
 	//Dependencias Stardog
-	compile "com.complexible.stardog:server:6.1.2" 
+	compile 'com.complexible.stardog:server:6.1.2' 
 	//compile "com.complexible.stardog.cache:stardog-cache-core:6.1.2" 
-	compile "com.stardog.stark.query:stardog-stark-query-api:6.1.2" 
-	compile "com.stardog.stark.io:stardog-stark-io-api:6.1.2" 
-	compile "com.stardog.stark.query.io:stardog-stark-query-io:6.1.2" 
-	compile ("com.complexible.stardog:client-http:6.1.2")
+	//compile "com.stardog.stark.query:stardog-stark-query-api:6.1.2" 
+	//compile "com.stardog.stark.io:stardog-stark-io-api:6.1.2" 
+	//compile "com.stardog.stark.query.io:stardog-stark-query-io:6.1.2" 
+	compile 'com.complexible.stardog:client-http:6.1.2'
 
     // This dependency is exported to consumers, that is to say found on their compile classpath.
     api 'org.apache.commons:commons-math3:3.6.1'
@@ -38,3 +41,4 @@ dependencies {
     // Use JUnit test framework
     testImplementation 'junit:junit:4.12'
 }
+mainClassName  = "Aplicacion"
