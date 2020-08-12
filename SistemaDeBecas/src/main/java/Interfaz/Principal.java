@@ -46,7 +46,8 @@ public class Principal {
 
 		//PanelInicio inicio = new PanelInicio();
 		//PanelTareas tareas = new PanelTareas();
-		PanelAlumnos nueva = new PanelAlumnos();
+		//PanelAlumnos nueva = new PanelAlumnos();
+		PanelInscripcion nueva = new PanelInscripcion();
 		//PanelDarAltaTitular altaTitular = new PanelDarAltaTitular();
 		frame.setContentPane(nueva);
 		frame.pack();
