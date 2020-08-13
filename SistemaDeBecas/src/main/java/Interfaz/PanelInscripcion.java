@@ -54,11 +54,13 @@ public class PanelInscripcion extends JPanel {
 	private JButton btnAceptar;
 	private JButton btnCancelar;
 	private JTable tabla;
-	private TablaAlumnos tablaAlumnos = new TablaAlumnos();
+	private TablaFamiliares tablaFamiliares = new TablaFamiliares();
 	private JTextField txtObs;
 
 	private AlumnosRepository bdalumnos= new AlumnosRepository();
 
+	private int seleccion = -1;
+	private List<Familiar> familiares=new ArrayList();
 	
 	private Frame framePadre;
 	
@@ -138,9 +140,24 @@ public class PanelInscripcion extends JPanel {
 		gridConst.gridx = 2;
 		gridConst.gridwidth = 1;
 		btnAgregar.addActionListener(e -> {
+			
 			String name = JOptionPane.showInputDialog("Ingrese su nombre");
 			String sueldo = JOptionPane.showInputDialog("Ingrese su sueldo");
-			JOptionPane.showMessageDialog(null, "Agregado "+name+" $"+sueldo);
+			if(true) {
+				try {
+					Familiar familiar = new Familiar();
+					familiar.setIngresos(Integer.valueOf(sueldo));
+					familiar.setNombre(name);
+					JOptionPane.showMessageDialog(null, "Agregado "+name+" $"+sueldo);
+					familiares.add(familiar);
+					actualizarTabla();
+				}catch(Exception ex) {
+					ex.printStackTrace();
+					JOptionPane.showMessageDialog(null, "Datos incorrectos", "Error", JOptionPane.OK_OPTION);
+				}
+				
+			}
+	
 			//agregar A LA LISTA
 		});
 		this.add(btnAgregar, gridConst);
@@ -149,11 +166,19 @@ public class PanelInscripcion extends JPanel {
 		gridConst.gridx = 3;
 		gridConst.gridwidth = 1;
 		btnEliminar.addActionListener(e -> {
-			//eliminar
+			if(seleccion<0) {
+				JOptionPane.showMessageDialog(null, "Seleccione una persona de la tabla", "Error", JOptionPane.OK_OPTION);
+			}
+			else {
+				familiares.remove(seleccion);
+				actualizarTabla();
+				seleccion=-1;
+				}
+			
 		});
 		this.add(btnEliminar, gridConst);
 		
-		tabla = new JTable(tablaAlumnos);
+		tabla = new JTable(tablaFamiliares);
 		gridConst.gridy = 6;
 		gridConst.gridx = 0;
 		gridConst.gridwidth = 4;
@@ -168,8 +193,8 @@ public class PanelInscripcion extends JPanel {
 		tabla.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseReleased(MouseEvent e) {
-				//int r = tabla.rowAtPoint(e.getPoint());
-				//seleccion = r;
+				int r = tabla.rowAtPoint(e.getPoint());
+				seleccion = r;
 			}
 		});
 
@@ -308,17 +333,25 @@ public class PanelInscripcion extends JPanel {
 
 
 //	Setea el resultado de la busqueda en la tabla
-	public void setResultadoBusqueda(List<Alumno> listaResultado, boolean actualizar) {
-		this.tablaAlumnos.setContribuyentes(listaResultado);
+	public void setResultadoBusqueda(List<Familiar> listaResultado, boolean actualizar) {
+		this.tablaFamiliares.setContribuyentes(listaResultado);
 		if(actualizar) {
-			this.tablaAlumnos.fireTableDataChanged();
+			this.tablaFamiliares.fireTableDataChanged();
 		}
+	}
+	
+	public void actualizarTabla() {
+		this.tablaFamiliares.setContribuyentes(familiares);
+		this.tablaFamiliares.fireTableDataChanged();
 	}
 
 //	Obtiene el parametro de busqueda, realiza la busqueda a traves del gestor de BD y por ultimo actualiza la tabla
 	public void postularse() {
+		
 
 		try {
+			
+			
 
 			Postulante postulante= new Postulante();
 			postulante.setLegajo(Integer.valueOf(this.txtLegajo.getText()));
@@ -334,9 +367,16 @@ public class PanelInscripcion extends JPanel {
 			postulante.setEmail(this.txtEmail.getText());
 			postulante.setTelefono(Long.valueOf(this.txtTelefono.getText()));
 			
+			int ingresos=0;
+			for(Familiar familiar: familiares) {
+				ingresos+=familiar.getIngresos();
+			}
+			
+			postulante.setCantidadDeFamiliares(familiares.size());
+			double promedio= ingresos/familiares.size();
+			System.out.print("INGRESOS: " + ingresos+" PROMEDIOS: "+promedio);
 			/*
-	private String carrera;
-	private int cantidadDeFamiliares; --------
+	ESTO NO SE SI ES PROMEDIO O TOTAL
 	private int ingresoFamiliar; -----------*/
 			///llamar a bd y guardar 
 		}
@@ -344,6 +384,7 @@ public class PanelInscripcion extends JPanel {
 			ex.printStackTrace();
 			JOptionPane.showMessageDialog(null, "Datos incorrectos", "Error", JOptionPane.OK_OPTION);
 		}
+		
 	}
 	
 
