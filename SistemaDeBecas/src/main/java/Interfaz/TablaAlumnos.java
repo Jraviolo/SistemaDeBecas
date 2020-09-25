@@ -12,7 +12,7 @@ public class TablaAlumnos extends AbstractTableModel{
 	private static SimpleDateFormat formatFecha = new SimpleDateFormat("dd/MM/yyyy");
 	
 	private List<Alumno> alumnos=new ArrayList();
-	private String[] columnas = {"DNI", "Nombre", "Apellido", "Fecha de Nacimiento", "Domicilio"};
+	private String[] columnas = {"Nombre", "Apellido", "Legajo", "Carrera", "Puntaje"};
 	
 //	Getters y Setters
 	
@@ -45,19 +45,25 @@ public class TablaAlumnos extends AbstractTableModel{
 		
 		switch(columnIndex) {
 		case 0:
-			valor = this.alumnos.get(rowIndex).getDocumento();
-			break;
-		case 1:
 			valor = this.alumnos.get(rowIndex).getNombre();
 			break;
-		case 2:
+		case 1:
 			valor = this.alumnos.get(rowIndex).getApellido();
 			break;
+		case 2:
+			valor = this.alumnos.get(rowIndex).getLegajo();
+			break;
 		case 3:
+			valor = this.alumnos.get(rowIndex).getCarrera();
+			break;
+		case 4:
+			valor = this.alumnos.get(rowIndex).getPuntaje();
+			break;
+		case 5:
 			//String fechaNacimiento = formatFecha.format(this.alumnos.get(rowIndex).getFecha_de_nacimiento());
 			//valor = fechaNacimiento;
 			break;
-		case 4:
+		case 6:
 			//valor = this.alumnos.get(rowIndex).getDireccion();
 			break;
 		default:

@@ -23,4 +23,16 @@ public class Alumno {
 	public void setDocumento(int documento) {
 		this.documento = documento;
 	}
+	public int getLegajo() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+	public String getCarrera() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	public int getPuntaje() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 }

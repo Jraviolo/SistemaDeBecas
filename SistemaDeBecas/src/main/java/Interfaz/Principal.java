@@ -11,7 +11,10 @@ import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.WindowConstants;
 
+import SistemaDeBecas.Controller;
+
 public class Principal {
+	private static Controller controller = new Controller();
 	URL iconURL = getClass().getResource("/imagenes/icono.png");
 	// iconURL is null when not found
 	ImageIcon icon = new ImageIcon(iconURL);
@@ -47,7 +50,8 @@ public class Principal {
 		//PanelInicio inicio = new PanelInicio();
 		//PanelTareas tareas = new PanelTareas();
 		//PanelAlumnos nueva = new PanelAlumnos();
-		PanelInscripcion nueva = new PanelInscripcion();
+		Prueba nueva = new Prueba(controller.buscar(0,0,0)); //NUMEROS PROVISORIOS
+		//PanelInscripcion nueva = new PanelInscripcion();
 		//PanelDarAltaTitular altaTitular = new PanelDarAltaTitular();
 		frame.setContentPane(nueva);
 		frame.pack();
