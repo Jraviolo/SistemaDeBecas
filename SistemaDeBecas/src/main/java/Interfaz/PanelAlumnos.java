@@ -19,15 +19,19 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 import javax.swing.SwingUtilities;
+
+import SistemaDeBecas.Controller;
 import clases.Alumno;
 import respository.AlumnosRepository;
 
 public class PanelAlumnos extends JPanel {
 
+	
 	private JLabel lblNombre;
 	private JLabel lblTitulo;
 	private JLabel lblDNI;
 	private JLabel lblPromedio;
+	private JLabel lblResultado;
 	private JTextField txtMaterias;
 	private JTextField txtPromedio;
 	private JButton btnBuscar;
@@ -35,9 +39,11 @@ public class PanelAlumnos extends JPanel {
 	private JTable tabla;
 	private TablaAlumnos tablaAlumnos = new TablaAlumnos();
 	private JTextField txtObs;
+	private String resultado = new String();
 
 	private AlumnosRepository bdalumnos= new AlumnosRepository();
 
+	//private Controller controller = new Controller();
 	
 	private Frame framePadre;
 	
@@ -98,15 +104,14 @@ public class PanelAlumnos extends JPanel {
 		this.add(txtPromedio, gridConst);
 
 
-		btnBuscar = new JButton("Buscar");
-		gridConst.gridx = 2;
-		gridConst.insets = new Insets(0, 5, 15, 5);
-		btnBuscar.addActionListener(e -> {
-			this.buscar();
-		});
-		this.add(btnBuscar, gridConst);
+
 		
 
+		/*
+		* Comento la tabla vieja y la cambio por un JLabel con la tabla html que 
+		* da el resultado de la query.
+		
+		
 		tabla = new JTable(tablaAlumnos);
 		gridConst.gridy = 4;
 		gridConst.gridx = 0;
@@ -118,7 +123,17 @@ public class PanelAlumnos extends JPanel {
 
 		this.add(scrollPane, gridConst);
 
-		tabla.addMouseListener(new MouseAdapter() {
+		*/
+		
+		lblResultado = new JLabel(resultado);
+		gridConst.gridy = 4;
+		gridConst.gridx = 0;
+		gridConst.gridwidth = 3;
+		//lblResultado.setVerticalAlignment(JLabel.TOP);
+		//lblResultado.setHorizontalAlignment(JLabel.CENTER);
+        this.add(lblResultado);
+		
+/*		tabla.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseReleased(MouseEvent e) {
 				//int r = tabla.rowAtPoint(e.getPoint());
@@ -126,21 +141,33 @@ public class PanelAlumnos extends JPanel {
 			}
 		});
 
-		gridConst.anchor = GridBagConstraints.LINE_END;
-
-
+		*/
+		
+		
+		//gridConst.anchor = GridBagConstraints.LINE_END;
+		
+		btnBuscar = new JButton("Buscar");
+		gridConst.gridy = 6;
+		gridConst.gridx = 1;
+		gridConst.insets = new Insets(0, 5, 15, 5);
+		btnBuscar.addActionListener(e -> {
+			this.buscar();
+		});
+		this.add(btnBuscar, gridConst);
+		
+/*
 		txtObs = new JTextField(24);
 		gridConst.gridx = 1;
 		gridConst.gridwidth = 2;
 		//gridConst.insets = new Insets(0, 5, 15, 5);	
 		this.add(txtObs, gridConst);
-
+*/
 
 
 		gridConst.anchor = GridBagConstraints.LINE_END;
 		btnCancelar = new JButton("Cancelar");
 		gridConst.gridy = 6;
-		gridConst.gridx = 1;
+		gridConst.gridx = 2;
 		gridConst.gridwidth = 1;
 		btnCancelar.addActionListener(e -> {
 			JFrame frame = (JFrame) SwingUtilities.getAncestorOfClass(JFrame.class, this);
@@ -154,6 +181,7 @@ public class PanelAlumnos extends JPanel {
 
 //	Setea el resultado de la busqueda en la tabla
 	public void setResultadoBusqueda(List<Alumno> listaResultado, boolean actualizar) {
+		
 		this.tablaAlumnos.setContribuyentes(listaResultado);
 		if(actualizar) {
 			this.tablaAlumnos.fireTableDataChanged();
@@ -173,9 +201,14 @@ public class PanelAlumnos extends JPanel {
 
 			int materiasAprobadas = Integer.valueOf(this.txtMaterias.getText());
 			int promedio = Integer.valueOf(this.txtPromedio.getText());
+			int anio = 2020; //TODO Hacer validación año de la beca.
 
-			List<Alumno> resultados = bdalumnos.getAlumnos(materiasAprobadas, promedio);
-			this.setResultadoBusqueda(resultados, true);
+			//resultado = controller.buscar(promedio, materiasAprobadas, anio);
+			//List<Alumno> resultados = bdalumnos.getAlumnos(materiasAprobadas, promedio);
+			//this.setResultadoBusqueda(resultados, true);
+			
+			lblResultado.setText(resultado);
+			
 		}
 		catch(Exception ex) {
 			ex.printStackTrace();

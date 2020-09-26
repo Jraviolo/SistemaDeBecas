@@ -25,6 +25,8 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 import javax.swing.SwingUtilities;
+
+import SistemaDeBecas.Controller;
 import clases.Alumno;
 import clases.Familiar;
 import clases.Postulante;
@@ -58,9 +60,11 @@ public class PanelInscripcion extends JPanel {
 	private JTextField txtObs;
 
 	private AlumnosRepository bdalumnos= new AlumnosRepository();
+	private Controller controller = new Controller();
 
 	private int seleccion = -1;
 	private List<Familiar> familiares=new ArrayList();
+	private float puntaje;
 	
 	private Frame framePadre;
 	
@@ -110,7 +114,7 @@ public class PanelInscripcion extends JPanel {
 		gridConst.insets = new Insets(0, 5, 15, 5);
 		this.add(lblCarrera, gridConst);
 		
-		String [] carreras = { "Ing Sistemas", "Ing Civil", "Ing Industrial" };
+		String [] carreras = { "Sistemas", "Civil", "Industrial", "Eléctrica", "Mecánica" };
 		cmbCarrera = new JComboBox(carreras);
 		cmbCarrera.setEditable(false);
 		cmbCarrera.setPreferredSize(new Dimension(200, 20));
@@ -375,10 +379,16 @@ public class PanelInscripcion extends JPanel {
 			postulante.setCantidadDeFamiliares(familiares.size());
 			double promedio= ingresos/familiares.size();
 			System.out.print("INGRESOS: " + ingresos+" PROMEDIOS: "+promedio);
+			
+			//TODO Calcular puntaje con la fórmula
+			//TODO Método postular en Controller
+			//controller.postular(postulante,puntaje);
+	
 			/*
 	ESTO NO SE SI ES PROMEDIO O TOTAL
 	private int ingresoFamiliar; -----------*/
 			///llamar a bd y guardar 
+			
 		}
 		catch(Exception ex) {
 			ex.printStackTrace();
