@@ -14,7 +14,7 @@ import javax.swing.WindowConstants;
 import SistemaDeBecas.Controller;
 
 public class Principal {
-	//private static Controller controller = new Controller();
+	private static Controller controller = new Controller();
 	URL iconURL = getClass().getResource("/imagenes/icono.png");
 	// iconURL is null when not found
 	ImageIcon icon = new ImageIcon(iconURL);
@@ -47,14 +47,15 @@ public class Principal {
 		frame.setSize(800, 800);
 		//frame.setIconImage(i);
 
-		//PanelInicio inicio = new PanelInicio();
+		PanelInicio nueva = new PanelInicio();
 		//PanelTareas tareas = new PanelTareas();
-		PanelAlumnos nueva = new PanelAlumnos();
-		//Prueba nueva = new Prueba(); //NUMEROS PROVISORIOS
+		//PanelAlumnos nueva = new PanelAlumnos();
+		//Prueba nueva = new Prueba(controller.buscar(5, 2, 2020)); //NUMEROS PROVISORIOS
 		//PanelInscripcion nueva = new PanelInscripcion();
 		//PanelDarAltaTitular altaTitular = new PanelDarAltaTitular();
 		frame.setContentPane(nueva);
-		frame.pack();
+		nueva.setFramePadre(frame);
+		//frame.pack();
 
 		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
         frame.setLocation(dim.width/2- frame.getSize().width/2, dim.height/2- frame.getSize().height/2);

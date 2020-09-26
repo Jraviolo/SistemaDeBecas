@@ -43,7 +43,7 @@ public class PanelAlumnos extends JPanel {
 
 	private AlumnosRepository bdalumnos= new AlumnosRepository();
 
-	//private Controller controller = new Controller();
+	private Controller controller = new Controller();
 	
 	private Frame framePadre;
 	
@@ -125,10 +125,11 @@ public class PanelAlumnos extends JPanel {
 
 		*/
 		
+		gridConst.anchor = GridBagConstraints.LINE_START;
 		lblResultado = new JLabel(resultado);
-		gridConst.gridy = 4;
+		gridConst.gridy = 8;
 		gridConst.gridx = 0;
-		gridConst.gridwidth = 3;
+		//gridConst.gridwidth = 3;
 		//lblResultado.setVerticalAlignment(JLabel.TOP);
 		//lblResultado.setHorizontalAlignment(JLabel.CENTER);
         this.add(lblResultado);
@@ -144,7 +145,7 @@ public class PanelAlumnos extends JPanel {
 		*/
 		
 		
-		//gridConst.anchor = GridBagConstraints.LINE_END;
+		gridConst.anchor = GridBagConstraints.LINE_END;
 		
 		btnBuscar = new JButton("Buscar");
 		gridConst.gridy = 6;
@@ -203,7 +204,7 @@ public class PanelAlumnos extends JPanel {
 			int promedio = Integer.valueOf(this.txtPromedio.getText());
 			int anio = 2020; //TODO Hacer validación año de la beca.
 
-			//resultado = controller.buscar(promedio, materiasAprobadas, anio);
+			resultado = controller.buscar(promedio, materiasAprobadas, anio);
 			//List<Alumno> resultados = bdalumnos.getAlumnos(materiasAprobadas, promedio);
 			//this.setResultadoBusqueda(resultados, true);
 			

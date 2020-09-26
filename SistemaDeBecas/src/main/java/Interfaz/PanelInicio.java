@@ -77,6 +77,7 @@ public class PanelInicio extends JPanel {
 		PanelInscripcion nueva = new PanelInscripcion();
 		((JFrame) framePadre).setContentPane(nueva);
 		framePadre.pack();
+		nueva.setFramePadre(framePadre);
 		
 	}
 	
@@ -84,7 +85,8 @@ public class PanelInicio extends JPanel {
 		
 		PanelAlumnos nueva = new PanelAlumnos();
 		((JFrame) framePadre).setContentPane(nueva);
-		//framePadre.pack();
+		framePadre.pack();
+		nueva.setFramePadre(framePadre);
 		
 	}
 
