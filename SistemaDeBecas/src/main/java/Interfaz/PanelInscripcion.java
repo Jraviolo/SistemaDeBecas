@@ -34,10 +34,12 @@ import respository.AlumnosRepository;
 
 public class PanelInscripcion extends JPanel {
 
-	private JLabel lblNombre;
+	private JLabel lblLogo;
 	private JLabel lblTitulo;
 	
 	private JTextField txtLegajo;
+	private JTextField txtNombre;
+	private JTextField txtApellido;
 	private JComboBox cmbCarrera;
 	private JLabel lblFamiliaresACargo;
 	private JTextField txtFamiliaresACargo;
@@ -79,13 +81,13 @@ public class PanelInscripcion extends JPanel {
 
 		gridConst.anchor = GridBagConstraints.CENTER;
 
-		lblNombre = new JLabel("Sistema de becas");
-		lblNombre.setFont(new Font(Font.DIALOG, Font.BOLD, 20));
+		lblLogo = new JLabel("Sistema de becas");
+		lblLogo.setFont(new Font(Font.DIALOG, Font.BOLD, 20));
 		gridConst.gridx = 0;
 		gridConst.gridy = 0;
 		gridConst.gridwidth = 3;
 		gridConst.insets = new Insets(15, 5, 20, 5);
-		this.add(lblNombre, gridConst);
+		this.add(lblLogo, gridConst);
 
 		gridConst.anchor = GridBagConstraints.LINE_START;
 		lblTitulo = new JLabel("Inscripcion a beca");
@@ -103,35 +105,49 @@ public class PanelInscripcion extends JPanel {
 		gridConst.insets = new Insets(0, 5, 15, 5);
 		this.add(lblLegajo, gridConst);
 
+		gridConst.anchor = GridBagConstraints.LINE_START;
 		txtLegajo = new JTextField(10);
 		gridConst.gridx = 1;
 		gridConst.insets = new Insets(0, 5, 15, 5);
 		this.add(txtLegajo, gridConst);
 		
 		JLabel lblCarrera = new JLabel("Carrera: ");
-		gridConst.gridx = 0;
-		gridConst.gridy = 3;
+		gridConst.gridx = 2;
+		gridConst.gridy = 2;
 		gridConst.insets = new Insets(0, 5, 15, 5);
 		this.add(lblCarrera, gridConst);
 		
 		String [] carreras = { "Sistemas", "Civil", "Industrial", "Eléctrica", "Mecánica" };
 		cmbCarrera = new JComboBox(carreras);
 		cmbCarrera.setEditable(false);
-		cmbCarrera.setPreferredSize(new Dimension(200, 20));
-		gridConst.gridx = 1;
+		cmbCarrera.setPreferredSize(new Dimension(100, 20));
+		gridConst.gridx = 3;
+		gridConst.gridwidth = 2;
 		this.add(cmbCarrera, gridConst);
 		
-		lblFamiliaresACargo = new JLabel("Familiares a cargo: ");
+		JLabel lblNombre = new JLabel("Nombre: ");
+		gridConst.gridy = 3;
 		gridConst.gridx = 0;
-		gridConst.gridy = 4;
+		gridConst.gridwidth = 1;
 		gridConst.insets = new Insets(0, 5, 15, 5);
-		this.add(lblFamiliaresACargo, gridConst);
-		//gridConst.anchor = GridBagConstraints.LINE_START;
+		this.add(lblNombre, gridConst);
 
-		txtFamiliaresACargo = new JTextField(10);
+		txtNombre = new JTextField(10);
 		gridConst.gridx = 1;
 		gridConst.insets = new Insets(0, 5, 15, 5);
-		this.add(txtFamiliaresACargo, gridConst);
+		this.add(txtNombre, gridConst);
+		
+		JLabel lblApellido = new JLabel("Apellido: ");
+		gridConst.gridy = 4;
+		gridConst.gridx = 0;
+		gridConst.insets = new Insets(0, 5, 15, 5);
+		this.add(lblApellido, gridConst);
+
+		txtApellido = new JTextField(10);
+		gridConst.gridx = 1;
+		gridConst.insets = new Insets(0, 5, 15, 5);
+		this.add(txtApellido, gridConst);
+			
 
 		JLabel lblIngresosamiliares = new JLabel("Ingresos Familiares: ");
 		gridConst.gridx = 0;
@@ -201,20 +217,32 @@ public class PanelInscripcion extends JPanel {
 				seleccion = r;
 			}
 		});
+		
+		lblFamiliaresACargo = new JLabel("Familiares a cargo: ");
+		gridConst.gridx = 0;
+		gridConst.gridy = 7;
+		gridConst.gridwidth = 1;
+		gridConst.insets = new Insets(0, 5, 15, 5);
+		this.add(lblFamiliaresACargo, gridConst);
+		//gridConst.anchor = GridBagConstraints.LINE_START;
 
+		txtFamiliaresACargo = new JTextField(10);
+		gridConst.gridx = 1;
+		gridConst.insets = new Insets(0, 5, 15, 5);
+		this.add(txtFamiliaresACargo, gridConst);
 
-		JLabel lblFechaDeNaciminto = new JLabel("Fecha de nacimiento: ");
+	/*	JLabel lblFechaDeNaciminto = new JLabel("Fecha de nacimiento: ");
 		gridConst.gridx = 0;
 		gridConst.gridy = 7;
 		gridConst.gridwidth=1;
 		gridConst.insets = new Insets(0, 5, 15, 5);
 		this.add(lblFechaDeNaciminto, gridConst);
-
+	 
 		txtFechaDeNaciminto = new JTextField(10);
 		gridConst.gridx = 1;
 		gridConst.insets = new Insets(0, 5, 15, 5);
 		this.add(txtFechaDeNaciminto, gridConst);
-
+	*/
 		JLabel lblNacionalidad = new JLabel("Nacionalidad: ");
 		gridConst.gridx = 0;
 		gridConst.gridy = 8;
@@ -360,6 +388,8 @@ public class PanelInscripcion extends JPanel {
 			Postulante postulante= new Postulante();
 			postulante.setLegajo(Integer.valueOf(this.txtLegajo.getText()));
 			postulante.setFamiliaresACargo(Integer.valueOf(this.txtFamiliaresACargo.getText()));
+			postulante.setNombre(txtNombre.getText());
+			postulante.setApellido(txtApellido.getText());
 			//postulante.setFechaDeNacimiento(this.txtFechaDeNaciminto.getText());
 			postulante.setCarrera(this.cmbCarrera.getSelectedItem().toString());
 			postulante.setNacionalidad(this.txtNacionalidad.getText());
@@ -371,18 +401,25 @@ public class PanelInscripcion extends JPanel {
 			postulante.setEmail(this.txtEmail.getText());
 			postulante.setTelefono(Long.valueOf(this.txtTelefono.getText()));
 			
+			
 			int ingresos=0;
 			for(Familiar familiar: familiares) {
 				ingresos+=familiar.getIngresos();
 			}
 			
 			postulante.setCantidadDeFamiliares(familiares.size());
-			double promedio= ingresos/familiares.size();
+			double promedio = 60; //= ingresos/familiares.size();
 			System.out.print("INGRESOS: " + ingresos+" PROMEDIOS: "+promedio);
 			
 			//TODO Calcular puntaje con la fórmula
 			//TODO Método postular en Controller
-			//controller.postular(postulante,puntaje);
+			//promedio = 60;
+			
+			puntaje = 89;
+			postulante.setMatAprobadas(6);
+			postulante.setCarrera("Civil");
+			
+			controller.postular(postulante,puntaje);
 	
 			/*
 	ESTO NO SE SI ES PROMEDIO O TOTAL

@@ -9,7 +9,13 @@ public class Postulante {
 	private int cantidadDeFamiliares;
 	private int ingresoFamiliar;
 	private int familiaresACargo;
+	private String nombre;
+	private String apellido;
+	private int matAprobadas;
+	private int promedio;
+	private int puntaje;
 	private Date fechaDeNacimiento;
+	
 	
 	private String nacionalidad;
 	private String localidad;
@@ -23,8 +29,39 @@ public class Postulante {
 	/*
 	 * Get and sets
 	 * */
+	
 	public int getLegajo() {
 		return legajo;
+	}
+	public String getNombre() {
+		return nombre;
+	}
+	public String getApellido() {
+		return apellido;
+	}
+	public void setApellido(String apellido) {
+		this.apellido = apellido;
+	}
+	public int getMatAprobadas() {
+		return matAprobadas;
+	}
+	public void setMatAprobadas(int matAprobadas) {
+		this.matAprobadas = matAprobadas;
+	}
+	public int getPromedio() {
+		return promedio;
+	}
+	public void setPromedio(int promedio) {
+		this.promedio = promedio;
+	}
+	public int getPuntaje() {
+		return puntaje;
+	}
+	public void setPuntaje(int puntaje) {
+		this.puntaje = puntaje;
+	}
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
 	}
 	public void setLegajo(int legajo) {
 		this.legajo = legajo;
@@ -107,6 +144,7 @@ public class Postulante {
 	public void setTelefono(long telefono) {
 		this.telefono = telefono;
 	}
+
 	
 	
 }
