@@ -54,6 +54,8 @@ public class PanelInscripcion extends JPanel {
 	private JTextField txtDomicilio;
 	private JTextField txtEmail;
 	private JTextField txtTelefono;
+	private JComboBox<String> cmbVivienda;
+	private JComboBox<String> cmbSalud;
 	
 	private JButton btnAceptar;
 	private JButton btnCancelar;
@@ -341,10 +343,34 @@ public class PanelInscripcion extends JPanel {
 		gridConst.insets = new Insets(0, 5, 15, 5);
 		this.add(txtTelefono, gridConst);
 		
-
+		JLabel lblVivienda = new JLabel("Vivienda: ");
+		gridConst.gridx = 0;
+		gridConst.gridy = 16;
+		gridConst.insets = new Insets(0, 5, 15, 5);
+		this.add(lblVivienda, gridConst);
+		
+		String [] vivienda = { "Propietario sin deuda", "Propietario con deuda", "Inquilino u ocupante" };
+		cmbVivienda = new JComboBox<String>(vivienda);
+		cmbVivienda.setEditable(false);
+		cmbCarrera.setPreferredSize(new Dimension(100, 20));
+		gridConst.gridx = 1;
+		this.add(cmbCarrera, gridConst);
+				
+		JLabel lblSalud = new JLabel("Salud: ");
+		gridConst.gridx = 2;
+		gridConst.insets = new Insets(0, 5, 15, 5);
+		this.add(lblSalud, gridConst);
+		
+		String [] salud = { "Tiene obra social", "Cobertura parcial", "No tiene obra social" };
+		cmbVivienda = new JComboBox<String>(vivienda);
+		cmbVivienda.setEditable(false);
+		cmbCarrera.setPreferredSize(new Dimension(100, 20));
+		gridConst.gridx = 1;
+		this.add(cmbCarrera, gridConst);
+		
 		gridConst.anchor = GridBagConstraints.LINE_END;
 		btnAceptar = new JButton("Postularse");
-		gridConst.gridy = 16;
+		gridConst.gridy = 17;
 		gridConst.gridx = 2;
 		gridConst.gridwidth = 1;
 		btnAceptar.addActionListener(e -> {
@@ -354,7 +380,7 @@ public class PanelInscripcion extends JPanel {
 		
 		gridConst.anchor = GridBagConstraints.LINE_END;
 		btnCancelar = new JButton("Cancelar");
-		gridConst.gridy = 16;
+		gridConst.gridy = 17;
 		gridConst.gridx = 3;
 		gridConst.gridwidth = 1;
 		btnCancelar.addActionListener(e -> {
@@ -453,7 +479,7 @@ public class PanelInscripcion extends JPanel {
 			
 			//Puntaje Vivienda 
 			//EXTRAER DE INTERFAZ 0 sin deudas - 1 con deudas - 2 sin propiedad
-			int condicionVivienda = 0;
+			int condicionVivienda = this.cmbVivienda.getSelectedIndex();
 			switch (condicionVivienda) {
 			case 0:
 				pVivienda = 0;
@@ -467,7 +493,7 @@ public class PanelInscripcion extends JPanel {
 			}
 			//Puntaje Salud
 			//EXTRAR DE INTERFAZ 0 tiene obra - 1 cobertura parcial - 2 no tiene
-			int condicionSalud = 0;
+			int condicionSalud = this.cmbSalud.getSelectedIndex();
 			switch (condicionSalud) {
 			case 0:
 				pSalud = 0;
