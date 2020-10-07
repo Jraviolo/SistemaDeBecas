@@ -352,9 +352,9 @@ public class PanelInscripcion extends JPanel {
 		String [] vivienda = { "Propietario sin deuda", "Propietario con deuda", "Inquilino u ocupante" };
 		cmbVivienda = new JComboBox<String>(vivienda);
 		cmbVivienda.setEditable(false);
-		cmbCarrera.setPreferredSize(new Dimension(100, 20));
+		cmbVivienda.setPreferredSize(new Dimension(100, 20));
 		gridConst.gridx = 1;
-		this.add(cmbCarrera, gridConst);
+		this.add(cmbVivienda, gridConst);
 				
 		JLabel lblSalud = new JLabel("Salud: ");
 		gridConst.gridx = 2;
@@ -362,11 +362,11 @@ public class PanelInscripcion extends JPanel {
 		this.add(lblSalud, gridConst);
 		
 		String [] salud = { "Tiene obra social", "Cobertura parcial", "No tiene obra social" };
-		cmbVivienda = new JComboBox<String>(vivienda);
-		cmbVivienda.setEditable(false);
-		cmbCarrera.setPreferredSize(new Dimension(100, 20));
-		gridConst.gridx = 1;
-		this.add(cmbCarrera, gridConst);
+		cmbSalud = new JComboBox<String>(salud);
+		cmbSalud.setEditable(false);
+		cmbSalud.setPreferredSize(new Dimension(100, 20));
+		gridConst.gridx = 3;
+		this.add(cmbSalud, gridConst);
 		
 		gridConst.anchor = GridBagConstraints.LINE_END;
 		btnAceptar = new JButton("Postularse");
