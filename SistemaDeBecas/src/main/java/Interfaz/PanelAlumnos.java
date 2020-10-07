@@ -129,10 +129,11 @@ public class PanelAlumnos extends JPanel {
 		lblResultado = new JLabel(resultado);
 		gridConst.gridy = 8;
 		gridConst.gridx = 0;
-		//gridConst.gridwidth = 3;
+		//this.setBounds(100, 550, 800,800);
+		//gridConst.gridwidth = 4;
 		//lblResultado.setVerticalAlignment(JLabel.TOP);
 		//lblResultado.setHorizontalAlignment(JLabel.CENTER);
-        this.add(lblResultado);
+        this.add(lblResultado,gridConst);
 		
 /*		tabla.addMouseListener(new MouseAdapter() {
 			@Override
@@ -171,8 +172,11 @@ public class PanelAlumnos extends JPanel {
 		gridConst.gridx = 2;
 		gridConst.gridwidth = 1;
 		btnCancelar.addActionListener(e -> {
-			JFrame frame = (JFrame) SwingUtilities.getAncestorOfClass(JFrame.class, this);
-			frame.dispose();
+			this.setVisible(false);
+			PanelInicio nuevo = new PanelInicio();
+			nuevo.setFramePadre(framePadre);
+			framePadre.pack();
+			((JFrame) framePadre).setContentPane(new PanelInicio());
 		});
 		this.add(btnCancelar, gridConst);
 
@@ -199,7 +203,7 @@ public class PanelAlumnos extends JPanel {
 			return;
 		}
 		else try {
-
+			
 			int materiasAprobadas = Integer.valueOf(this.txtMaterias.getText());
 			int promedio = Integer.valueOf(this.txtPromedio.getText());
 			int anio = 2020; //TODO Hacer validación año de la beca.

@@ -68,7 +68,7 @@ public class PanelInscripcion extends JPanel {
 
 	private int seleccion = -1;
 	private List<Familiar> familiares=new ArrayList();
-	private float puntaje;
+	private int puntaje;
 	
 	private Frame framePadre;
 	
@@ -384,8 +384,15 @@ public class PanelInscripcion extends JPanel {
 		gridConst.gridx = 3;
 		gridConst.gridwidth = 1;
 		btnCancelar.addActionListener(e -> {
-			JFrame frame = (JFrame) SwingUtilities.getAncestorOfClass(JFrame.class, this);
-			frame.dispose();
+			this.setVisible(false);
+			PanelInicio nuevo = new PanelInicio();
+			nuevo.setFramePadre(framePadre);
+			//framePadre.setSize(1200, 1200);
+			framePadre.pack();
+			((JFrame) framePadre).setContentPane(nuevo);
+			
+			//JFrame frame = (JFrame) SwingUtilities.getAncestorOfClass(JFrame.class, this);
+			//frame.dispose();
 		});
 		this.add(btnCancelar, gridConst);
 		
@@ -442,12 +449,13 @@ public class PanelInscripcion extends JPanel {
 			
 			postulante.setCantidadDeFamiliares(familiares.size());
 			double promedio = Math.random() * (61) + 30 ; //= ingresos/familiares.size();
-			System.out.print("INGRESOS: " + ingresos+" PROMEDIOS: "+promedio);
+			System.out.print("INGRESOS: " + ingresos+" PROMEDIOS: "+(int)promedio);
+			postulante.setPromedio((int) promedio);
 			
 			//TODO Calcular puntaje con la fórmula
 		//NACHO
 			
-			int pIngresos, pActLaboral, pVivienda, pSalud, pDependencia, pPromedio, pRendimiento, pDesarrollo;
+			int pIngresos, pActLaboral, pVivienda = 0, pSalud = 0, pDependencia, pPromedio, pRendimiento, pDesarrollo;
 			
 			//Puntaje Ingresos
 			int canastaBasicaPostulante = familiares.size() * canastaBasicaPromedio; 
@@ -538,8 +546,9 @@ public class PanelInscripcion extends JPanel {
 			//promedio = 60;
 			
 			puntaje = pIngresos + pActLaboral + pVivienda + pSalud + pDependencia + pPromedio + pRendimiento + pDesarrollo;
-			postulante.setMatAprobadas(6);
-			postulante.setCarrera("Civil");
+			postulante.setMatAprobadas(materiasAprobadas);
+			System.out.println("Puntaje: "+puntaje);
+			//postulante.setCarrera("Civil");
 			controller.postular(postulante,puntaje);
 	
 			/*

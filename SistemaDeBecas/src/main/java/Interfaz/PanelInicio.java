@@ -24,6 +24,8 @@ public class PanelInicio extends JPanel {
 	private JButton btnSalir;
 	
 	private Frame framePadre;
+	private PanelAlumnos pAlumnos;
+	private PanelInscripcion pInscripcion;
 	
 	
 	public PanelInicio() {
@@ -73,20 +75,21 @@ public class PanelInicio extends JPanel {
 
 
 	private void postular() {
-		
-		PanelInscripcion nueva = new PanelInscripcion();
-		((JFrame) framePadre).setContentPane(nueva);
+		pInscripcion = new PanelInscripcion();
+		//PanelInscripcion nueva = new PanelInscripcion();
+		((JFrame) framePadre).setContentPane(pInscripcion);
 		framePadre.pack();
-		nueva.setFramePadre(framePadre);
+		pInscripcion.setFramePadre(framePadre);
 		
 	}
 	
 	private void verRanking() {
-		
-		PanelAlumnos nueva = new PanelAlumnos();
-		((JFrame) framePadre).setContentPane(nueva);
+		pAlumnos = new PanelAlumnos();
+		//PanelAlumnos nueva = new PanelAlumnos();
+		((JFrame) framePadre).setContentPane(pAlumnos);
 		framePadre.pack();
-		nueva.setFramePadre(framePadre);
+		framePadre.setSize(800, 800);
+		pAlumnos.setFramePadre(framePadre);
 		
 	}
 
