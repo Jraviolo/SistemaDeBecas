@@ -74,6 +74,10 @@ public class PanelInscripcion extends JPanel {
 		this.setLayout(new GridBagLayout());
 		this.construir();
 	}
+	
+	//Datos para puntaje
+	int salarioMinimo = 16875;
+	int canastaBasicaPromedio = 11930;
 
 	private void construir() {
 
@@ -288,7 +292,7 @@ public class PanelInscripcion extends JPanel {
 		gridConst.insets = new Insets(0, 5, 15, 5);
 		this.add(txtCodigoPostal, gridConst);
 		
-		JLabel lblSituacionSocial = new JLabel("Sictuacion social: ");
+		JLabel lblSituacionSocial = new JLabel("Situacion social: ");
 		gridConst.gridx = 0;
 		gridConst.gridy = 12;
 		gridConst.insets = new Insets(0, 5, 15, 5);
@@ -402,23 +406,114 @@ public class PanelInscripcion extends JPanel {
 			postulante.setTelefono(Long.valueOf(this.txtTelefono.getText()));
 			
 			
-			int ingresos=0;
+			int ingresos=0, miembrosEconomicamenteActivos = 0;
 			for(Familiar familiar: familiares) {
 				ingresos+=familiar.getIngresos();
+				if(ingresos > 0) {
+					miembrosEconomicamenteActivos++;
+				}
 			}
 			
 			postulante.setCantidadDeFamiliares(familiares.size());
-			double promedio = 60; //= ingresos/familiares.size();
+			double promedio = Math.random() * (61) + 30 ; //= ingresos/familiares.size();
 			System.out.print("INGRESOS: " + ingresos+" PROMEDIOS: "+promedio);
 			
 			//TODO Calcular puntaje con la fórmula
+		//NACHO
+			
+			int pIngresos, pActLaboral, pVivienda, pSalud, pDependencia, pPromedio, pRendimiento, pDesarrollo;
+			
+			//Puntaje Ingresos
+			int canastaBasicaPostulante = familiares.size() * canastaBasicaPromedio; 
+			if(ingresos <= canastaBasicaPostulante) {
+				pIngresos = 30;
+			}
+			else if(ingresos >= (2*canastaBasicaPostulante)) {
+				pIngresos = 0;
+			}
+			else {
+				pIngresos = (int) (30 - 0.15 * (familiares.size() - ingresos));
+			}
+			
+			//Puntaje Condicion Actividad Laboral
+			
+			
+			int puntajeMiembros = 0;
+			
+			for (Familiar familiar: familiares) {
+					if(familiar.getIngresos() == 0) {
+						puntajeMiembros = puntajeMiembros + 5;
+					}
+					else if(familiar.getIngresos() < salarioMinimo) {
+						puntajeMiembros = puntajeMiembros + 3;
+					}
+			}
+			
+			pActLaboral = puntajeMiembros/miembrosEconomicamenteActivos;
+			
+			//Puntaje Vivienda 
+			//EXTRAER DE INTERFAZ 0 sin deudas - 1 con deudas - 2 sin propiedad
+			int condicionVivienda = 0;
+			switch (condicionVivienda) {
+			case 0:
+				pVivienda = 0;
+				break;
+			case 1:
+				pVivienda = 3;
+				break;
+			case 2:
+				pVivienda = 5;
+				break;
+			}
+			//Puntaje Salud
+			//EXTRAR DE INTERFAZ 0 tiene obra - 1 cobertura parcial - 2 no tiene
+			int condicionSalud = 0;
+			switch (condicionSalud) {
+			case 0:
+				pSalud = 0;
+				break;
+			case 1:
+				pSalud = 3;
+				break;
+			case 2:
+				pSalud = 5;
+				break;
+			}
+			//Puntaje Dependencia
+			if (familiares.size() - miembrosEconomicamenteActivos == 0) {
+				pDependencia = 0;
+			}
+			else if(familiares.size() - miembrosEconomicamenteActivos > 2) {
+				pDependencia = 5;
+			}
+			else{
+				pDependencia = 3;				
+			}
+			//Puntaje Rendimiento académico
+			int materiasAprobadas =  (int) (Math.random() * (41));
+			if(materiasAprobadas == 0) {
+				pRendimiento = 4;
+				pPromedio = 14;
+			}
+			else {
+				int materiasRegularizadas = (int) (Math.random() * (41 - materiasAprobadas));
+				pRendimiento = materiasAprobadas/materiasRegularizadas * 10;
+			//Puntaje Promedio
+			//Se recuperaria del sysacad
+				pPromedio = (int) (promedio/10 * 3.5);
+			}
+			
+			//Puntaje Plan Desarrollo
+			//Evaluado por comisión local
+			pDesarrollo = (int) (Math.random() * 5 + 1);
+			
+		//NACHO
 			//TODO Método postular en Controller
 			//promedio = 60;
 			
-			puntaje = 89;
+			puntaje = pIngresos + pActLaboral + pVivienda + pSalud + pDependencia + pPromedio + pRendimiento + pDesarrollo;
 			postulante.setMatAprobadas(6);
 			postulante.setCarrera("Civil");
-			
 			controller.postular(postulante,puntaje);
 	
 			/*

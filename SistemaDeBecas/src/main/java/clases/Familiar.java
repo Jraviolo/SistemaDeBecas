@@ -16,5 +16,4 @@ public class Familiar {
 	public void setIngresos(int ingresos) {
 		this.ingresos = ingresos;
 	}
-	
 }
