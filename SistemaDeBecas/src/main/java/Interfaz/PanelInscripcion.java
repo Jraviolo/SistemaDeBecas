@@ -30,7 +30,6 @@ import SistemaDeBecas.Controller;
 import clases.Alumno;
 import clases.Familiar;
 import clases.Postulante;
-import respository.AlumnosRepository;
 
 public class PanelInscripcion extends JPanel {
 
@@ -45,7 +44,6 @@ public class PanelInscripcion extends JPanel {
 	private JTextField txtFamiliaresACargo;
 	private JButton btnAgregar;
 	private JButton btnEliminar;
-	private JTextField txtFechaDeNaciminto;
 	private JTextField txtNacionalidad;
 	private JTextField txtLocalidad;
 	private JTextField txtProvincia;
@@ -63,7 +61,6 @@ public class PanelInscripcion extends JPanel {
 	private TablaFamiliares tablaFamiliares = new TablaFamiliares();
 	private JTextField txtObs;
 
-	private AlumnosRepository bdalumnos= new AlumnosRepository();
 	private Controller controller = new Controller();
 
 	private int seleccion = -1;
@@ -160,7 +157,7 @@ public class PanelInscripcion extends JPanel {
 		gridConst.gridy = 5;
 		gridConst.insets = new Insets(0, 5, 15, 5);
 		this.add(lblIngresosamiliares, gridConst);
-		//gridConst.anchor = GridBagConstraints.LINE_START;
+
 		
 		btnAgregar = new JButton("+ Agregar");
 		gridConst.gridx = 2;
@@ -184,7 +181,7 @@ public class PanelInscripcion extends JPanel {
 				
 			}
 	
-			//agregar A LA LISTA
+
 		});
 		this.add(btnAgregar, gridConst);
 		
@@ -230,25 +227,13 @@ public class PanelInscripcion extends JPanel {
 		gridConst.gridwidth = 1;
 		gridConst.insets = new Insets(0, 5, 15, 5);
 		this.add(lblFamiliaresACargo, gridConst);
-		//gridConst.anchor = GridBagConstraints.LINE_START;
+		
 
 		txtFamiliaresACargo = new JTextField(10);
 		gridConst.gridx = 1;
 		gridConst.insets = new Insets(0, 5, 15, 5);
 		this.add(txtFamiliaresACargo, gridConst);
 
-	/*	JLabel lblFechaDeNaciminto = new JLabel("Fecha de nacimiento: ");
-		gridConst.gridx = 0;
-		gridConst.gridy = 7;
-		gridConst.gridwidth=1;
-		gridConst.insets = new Insets(0, 5, 15, 5);
-		this.add(lblFechaDeNaciminto, gridConst);
-	 
-		txtFechaDeNaciminto = new JTextField(10);
-		gridConst.gridx = 1;
-		gridConst.insets = new Insets(0, 5, 15, 5);
-		this.add(txtFechaDeNaciminto, gridConst);
-	*/
 		JLabel lblNacionalidad = new JLabel("Nacionalidad: ");
 		gridConst.gridx = 0;
 		gridConst.gridy = 8;
@@ -294,7 +279,7 @@ public class PanelInscripcion extends JPanel {
 		gridConst.insets = new Insets(0, 5, 15, 5);
 		this.add(txtCodigoPostal, gridConst);
 		
-		JLabel lblSituacionSocial = new JLabel("Situacion social: ");
+	/*	JLabel lblSituacionSocial = new JLabel("Situacion social: ");
 		gridConst.gridx = 0;
 		gridConst.gridy = 12;
 		gridConst.insets = new Insets(0, 5, 15, 5);
@@ -305,11 +290,11 @@ public class PanelInscripcion extends JPanel {
 		gridConst.gridx = 1;
 		gridConst.insets = new Insets(0, 5, 15, 5);
 		this.add(txtSituacionSocial, gridConst);
-
+*/
 		
 		JLabel lblDomicilio = new JLabel("Domicilio: ");
 		gridConst.gridx = 0;
-		gridConst.gridy = 13;
+		gridConst.gridy = 12;
 		gridConst.insets = new Insets(0, 5, 15, 5);
 		this.add(lblDomicilio, gridConst);
 
@@ -321,7 +306,7 @@ public class PanelInscripcion extends JPanel {
 		
 		JLabel lblEmail = new JLabel("Email: ");
 		gridConst.gridx = 0;
-		gridConst.gridy = 14;
+		gridConst.gridy = 13;
 		gridConst.insets = new Insets(0, 5, 15, 5);
 		this.add(lblEmail, gridConst);
 
@@ -333,7 +318,7 @@ public class PanelInscripcion extends JPanel {
 		
 		JLabel lblTelefono = new JLabel("Telefono: ");
 		gridConst.gridx = 0;
-		gridConst.gridy = 15;
+		gridConst.gridy = 14;
 		gridConst.insets = new Insets(0, 5, 15, 5);
 		this.add(lblTelefono, gridConst);
 
@@ -345,7 +330,7 @@ public class PanelInscripcion extends JPanel {
 		
 		JLabel lblVivienda = new JLabel("Vivienda: ");
 		gridConst.gridx = 0;
-		gridConst.gridy = 16;
+		gridConst.gridy = 15;
 		gridConst.insets = new Insets(0, 5, 15, 5);
 		this.add(lblVivienda, gridConst);
 		
@@ -370,7 +355,7 @@ public class PanelInscripcion extends JPanel {
 		
 		gridConst.anchor = GridBagConstraints.LINE_END;
 		btnAceptar = new JButton("Postularse");
-		gridConst.gridy = 17;
+		gridConst.gridy = 16;
 		gridConst.gridx = 2;
 		gridConst.gridwidth = 1;
 		btnAceptar.addActionListener(e -> {
@@ -380,19 +365,15 @@ public class PanelInscripcion extends JPanel {
 		
 		gridConst.anchor = GridBagConstraints.LINE_END;
 		btnCancelar = new JButton("Cancelar");
-		gridConst.gridy = 17;
+		gridConst.gridy = 16;
 		gridConst.gridx = 3;
 		gridConst.gridwidth = 1;
 		btnCancelar.addActionListener(e -> {
 			this.setVisible(false);
 			PanelInicio nuevo = new PanelInicio();
 			nuevo.setFramePadre(framePadre);
-			//framePadre.setSize(1200, 1200);
 			framePadre.pack();
 			((JFrame) framePadre).setContentPane(nuevo);
-			
-			//JFrame frame = (JFrame) SwingUtilities.getAncestorOfClass(JFrame.class, this);
-			//frame.dispose();
 		});
 		this.add(btnCancelar, gridConst);
 		
@@ -417,10 +398,7 @@ public class PanelInscripcion extends JPanel {
 //	Obtiene el parametro de busqueda, realiza la busqueda a traves del gestor de BD y por ultimo actualiza la tabla
 	public void postularse() {
 		
-
-		try {
-			
-			
+		try {			
 
 			Postulante postulante= new Postulante();
 			postulante.setLegajo(Integer.valueOf(this.txtLegajo.getText()));
@@ -432,7 +410,7 @@ public class PanelInscripcion extends JPanel {
 			postulante.setNacionalidad(this.txtNacionalidad.getText());
 			postulante.setLocalidad(this.txtLocalidad.getText());
 			postulante.setProvincia(this.txtProvincia.getText());
-			postulante.setSituacionSocial(this.txtSituacionSocial.getText());
+			//postulante.setSituacionSocial(this.txtSituacionSocial.getText());
 			postulante.setDomicilio(this.txtDomicilio.getText());
 			postulante.setCodigoPostal(this.txtCodigoPostal.getText());
 			postulante.setEmail(this.txtEmail.getText());
@@ -448,14 +426,11 @@ public class PanelInscripcion extends JPanel {
 			}
 			
 			postulante.setCantidadDeFamiliares(familiares.size());
-			double promedio = Math.random() * (61) + 30 ; //= ingresos/familiares.size();
-			System.out.print("INGRESOS: " + ingresos+" PROMEDIOS: "+(int)promedio);
+			double promedio = Math.random() * (61) + 30 ; 
 			postulante.setPromedio((int) promedio);
 			
-			//TODO Calcular puntaje con la fórmula
-		//NACHO
 			
-			int pIngresos, pActLaboral, pVivienda = 0, pSalud = 0, pDependencia, pPromedio, pRendimiento, pDesarrollo;
+			int pIngresos, pActLaboral = 0, pVivienda = 0, pSalud = 0, pDependencia, pPromedio, pRendimiento, pDesarrollo;
 			
 			//Puntaje Ingresos
 			int canastaBasicaPostulante = familiares.size() * canastaBasicaPromedio; 
@@ -483,10 +458,11 @@ public class PanelInscripcion extends JPanel {
 					}
 			}
 			
+			if(miembrosEconomicamenteActivos>0) {
 			pActLaboral = puntajeMiembros/miembrosEconomicamenteActivos;
+			}
 			
-			//Puntaje Vivienda 
-			//EXTRAER DE INTERFAZ 0 sin deudas - 1 con deudas - 2 sin propiedad
+			//Puntaje Vivienda - Extrae de cmbVivienda: 0 sin deudas - 1 con deudas - 2 sin propiedad
 			int condicionVivienda = this.cmbVivienda.getSelectedIndex();
 			switch (condicionVivienda) {
 			case 0:
@@ -499,8 +475,8 @@ public class PanelInscripcion extends JPanel {
 				pVivienda = 5;
 				break;
 			}
-			//Puntaje Salud
-			//EXTRAR DE INTERFAZ 0 tiene obra - 1 cobertura parcial - 2 no tiene
+			
+			//Puntaje Salud - Extrae de cmbSalud: 0 tiene obra - 1 cobertura parcial - 2 no tiene
 			int condicionSalud = this.cmbSalud.getSelectedIndex();
 			switch (condicionSalud) {
 			case 0:
@@ -513,6 +489,7 @@ public class PanelInscripcion extends JPanel {
 				pSalud = 5;
 				break;
 			}
+			
 			//Puntaje Dependencia
 			if (familiares.size() - miembrosEconomicamenteActivos == 0) {
 				pDependencia = 0;
@@ -523,8 +500,9 @@ public class PanelInscripcion extends JPanel {
 			else{
 				pDependencia = 3;				
 			}
+			
 			//Puntaje Rendimiento académico
-			int materiasAprobadas =  (int) (Math.random() * (41));
+			int materiasAprobadas =  (int) (Math.random() * (11));
 			if(materiasAprobadas == 0) {
 				pRendimiento = 4;
 				pPromedio = 14;
@@ -532,29 +510,27 @@ public class PanelInscripcion extends JPanel {
 			else {
 				int materiasRegularizadas = (int) (Math.random() * (41 - materiasAprobadas));
 				pRendimiento = materiasAprobadas/materiasRegularizadas * 10;
-			//Puntaje Promedio
-			//Se recuperaria del sysacad
+			//Puntaje Promedio: Se recuperaria del sysacad
 				pPromedio = (int) (promedio/10 * 3.5);
 			}
 			
-			//Puntaje Plan Desarrollo
-			//Evaluado por comisión local
+			//Puntaje Plan Desarrollo: Evaluado por comisión local
 			pDesarrollo = (int) (Math.random() * 5 + 1);
-			
-		//NACHO
-			//TODO Método postular en Controller
-			//promedio = 60;
-			
+
+
 			puntaje = pIngresos + pActLaboral + pVivienda + pSalud + pDependencia + pPromedio + pRendimiento + pDesarrollo;
 			postulante.setMatAprobadas(materiasAprobadas);
-			System.out.println("Puntaje: "+puntaje);
-			//postulante.setCarrera("Civil");
-			controller.postular(postulante,puntaje);
-	
-			/*
-	ESTO NO SE SI ES PROMEDIO O TOTAL
-	private int ingresoFamiliar; -----------*/
-			///llamar a bd y guardar 
+			
+			try{ 
+				controller.postular(postulante,puntaje); 
+				JOptionPane.showMessageDialog(null, "Se postuló al alumno "+postulante.getNombre()+" "+postulante.getApellido()+".", "Postulación exitosa.", JOptionPane.OK_OPTION);
+				limpiarCampos();
+			} 
+			catch(Exception ex) {
+				ex.printStackTrace();
+				JOptionPane.showMessageDialog(null, "No se pudo postular el alumno", "Error", JOptionPane.OK_OPTION);
+			}
+
 			
 		}
 		catch(Exception ex) {
@@ -562,6 +538,25 @@ public class PanelInscripcion extends JPanel {
 			JOptionPane.showMessageDialog(null, "Datos incorrectos", "Error", JOptionPane.OK_OPTION);
 		}
 		
+	}
+	
+	private void limpiarCampos(){
+		txtLegajo.setText("");
+		txtNombre.setText("");
+		txtApellido.setText("");
+		lblFamiliaresACargo.setText("");
+		txtFamiliaresACargo.setText("");
+		txtNacionalidad.setText("");
+		txtLocalidad.setText("");
+		txtProvincia.setText("");
+		txtCodigoPostal.setText("");
+		txtDomicilio.setText("");
+		txtEmail.setText("");
+		txtTelefono.setText("");
+		for(int i=(familiares.size()-1); i>0; i--) {
+			familiares.remove(i);
+		}
+		actualizarTabla();
 	}
 	
 

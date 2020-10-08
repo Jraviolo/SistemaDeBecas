@@ -22,7 +22,6 @@ import javax.swing.SwingUtilities;
 
 import SistemaDeBecas.Controller;
 import clases.Alumno;
-import respository.AlumnosRepository;
 
 public class PanelAlumnos extends JPanel {
 
@@ -41,7 +40,6 @@ public class PanelAlumnos extends JPanel {
 	private JTextField txtObs;
 	private String resultado = new String();
 
-	private AlumnosRepository bdalumnos= new AlumnosRepository();
 
 	private Controller controller = new Controller();
 	
